@@ -13,7 +13,7 @@ node;
 node *create (int value); // create an value with an integer of value.
 bool search (node *head, int target); // linear search inside a linked list, and returns true when found target.
 void insert(node *pointer, int value); // function to append a new node.
-void destroy(node *bad);
+void destroy(node *bad); // free all nodes for the targeted linked list.
 
 int main(void)
 {
@@ -92,6 +92,7 @@ void insert(node *pointer, int value)
     pointer->next = new_node;
 }
 
+// function to free targeted linked list
 void destroy(node *bad)
 {
     while (bad != NULL)
