@@ -13,6 +13,7 @@ node;
 node *create (int value); // create an value with an integer of value.
 bool search (node *head, int target); // linear search inside a linked list, and returns true when found target.
 void insert(node *pointer, int value); // function to append a new node.
+void destroy(node *bad);
 
 int main(void)
 {
@@ -28,7 +29,7 @@ int main(void)
     // search for a certain value 'i' within the linked list, until specified value.
     for (int i = 0; i < 7; i++)
     {
-        if(search(y, i))
+        if (search(y, i))
         {
             printf ("Found %i\n", i);
         }
@@ -47,12 +48,7 @@ int main(void)
     printf("\n");
 
     // free all nodes.
-    while (y != NULL)
-    {
-        node *tmp = y->next;
-        free(y);
-        y = tmp;
-    }
+    destroy(y);
 }
 
 // function to initialize linked list.
@@ -87,16 +83,21 @@ void insert(node *pointer, int value)
     node *new_node = malloc(sizeof(node));
     if (new_node == NULL)
     {
-        while (pointer != NULL)
-        {
-            node *tmp = pointer->next;
-            free(pointer);
-            pointer = tmp;
-        }
+        destroy(pointer);
         return;
     }
 
     new_node->x = value;
     new_node->next = pointer->next;
     pointer->next = new_node;
+}
+
+void destroy(node *bad)
+{
+    while (bad != NULL)
+    {
+        node *tmp = bad->next;
+        free(bad);
+        bad = tmp;
+    }
 }
